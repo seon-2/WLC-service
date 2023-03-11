@@ -1,10 +1,13 @@
+import React, { Component } from 'react';
+import './wlc.css';
+import Wlc from './Wlc';
 
-import "./App.css";
-
-function App() {
-  return <div className="App">
-    <h1>WLC-SERVICE</h1>
-  </div>;
+class App extends Component{
+	render(){
+		return(
+			<Wlc></Wlc>
+		)
+	}
 }
 
 export default App;
