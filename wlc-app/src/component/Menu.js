@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Menu extends Component{
 	render(){
 		return(
-			<>
+			<>{/*해당문답으로이동*/}
 			<div className="menu">
 				<ul>
 					<li>
