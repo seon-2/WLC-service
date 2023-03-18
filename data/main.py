@@ -22,7 +22,7 @@ def ENG_func():
     list_99 = ['1', '2', '3', '4', '5', '6', '7', '8']
     answer_num = "0"
     line_pass = True
-    with open("WLC-service/data/test.txt", "r") as f:
+    with open("test.txt", "r") as f:
         for line in f:
             line = line.strip()
             if line != "\n":
@@ -34,7 +34,9 @@ def ENG_func():
                     txt_list[question_num].append(temp[2])
 
                     answer_num = "A" + temp[1]
+                    ref_num = "ref" + temp[1]
                     txt_list[answer_num] = []
+                    txt_list[ref_num] = []
 
                 elif "A." in line or line_type == "A":
                     line_type = "A"
@@ -53,8 +55,12 @@ def ENG_func():
                                 txt_list[answer_num].append(line.split(num)[0])
                                 txt_list[answer_num].append("ref." + num)
                                 line = line.split(num)[-1].lstrip()
+                                txt_list[ref_num].append(int(num))
                         if line and line_pass:
                             txt_list[answer_num].append(line)
+
+
+
 
 
                     # if answer_num == "A 99" and len(numbers) > 1:
