@@ -18,9 +18,11 @@ def KOR_func():
         json.dump(txt_list, outfile, indent=4, ensure_ascii=False)
 
 def ENG_func():
+    dic_list = {}
     txt_list = {}
     list_99 = ['1', '2', '3', '4', '5', '6', '7', '8']
     answer_num = "0"
+    temp_num = "0"
     line_pass = True
     with open("test.txt", "r") as f:
         for line in f:
@@ -29,12 +31,17 @@ def ENG_func():
                 if "Q." in line:
                     line_type = "Q"
                     temp = line.split('. ')
-                    question_num = temp[0] + temp[1]
+                    temp_num = int(temp[1])
+                    dic_list[temp_num] = {}
+                    # question_num = temp[0] + temp[1]
+                    question_num = temp[0]
                     txt_list[question_num] = []
                     txt_list[question_num].append(temp[2])
-
-                    answer_num = "A" + temp[1]
-                    ref_num = "ref" + temp[1]
+                    dic_list[temp_num][question_num] = txt_list[question_num]
+                    # answer_num = "A" + temp[1]
+                    answer_num = "A"
+                    # ref_num = "ref" + temp[1]
+                    ref_num = "ref"
                     txt_list[answer_num] = []
                     txt_list[ref_num] = []
 
@@ -47,46 +54,38 @@ def ENG_func():
                     if numbers:
                         for num in numbers:
                             line_pass = True
-                            if answer_num == "A99" and num in list_99:
+                            if temp_num == 99 and num in list_99:
                                 if len(numbers) == 1:
                                     txt_list[answer_num].append(line)
+                                    dic_list[temp_num][answer_num] = txt_list[answer_num]
                                     line_pass = False
                             else:
                                 txt_list[answer_num].append(line.split(num)[0])
-                                txt_list[answer_num].append("ref." + num)
+                                dic_list[temp_num][answer_num] = txt_list[answer_num]
+                                txt_list[answer_num].append(" [" + num + "] ")
+                                dic_list[temp_num][answer_num] = txt_list[answer_num]
                                 line = line.split(num)[-1].lstrip()
                                 txt_list[ref_num].append(int(num))
+                                dic_list[temp_num][ref_num] = txt_list[ref_num]
                         if line and line_pass:
                             txt_list[answer_num].append(line)
-
-
-
-
-
-                    # if answer_num == "A 99" and len(numbers) > 1:
-                    #     line = line.split(numbers[1])[0]
-                    #     numbers.pop(0)
-                    # elif numbers:
-                    #     line = line.split(numbers[0])[0]
-                    #
-                    # txt_list[answer_num].append(line)
-                    #
-                    # for number in numbers:
-                    #     txt_list[answer_num].append(number)
+                            dic_list[temp_num][answer_num] = txt_list[answer_num]
 
                 elif line_type == "Q" and line:
                     txt_list[question_num].append(line)
+                    dic_list[temp_num][question_num] = txt_list[question_num]
 
+    page_list = {}
+    page_num = 1
+    for temp_num in dic_list:
+        page_list[str(page_num)] = dic_list[temp_num]
 
-
-
-    # print(txt_list)
-
-    file_path = "WLC_ENG.json"
+    # file_path = "WLC_ENG.json"
+    file_path = "WLC_test.json"
     with open(file_path, 'w', encoding='utf-8') as outfile:
         # for line in txt_list:
-        json.dump(txt_list, outfile, indent=4, ensure_ascii=False)
-
+        # json.dump(txt_list, outfile, indent=4, ensure_ascii=False)
+        json.dump(dic_list, outfile, indent=4, ensure_ascii=False)
 
     def pdf_out_txt():
         pdf_path = "./WLC-service/data/Westminster-Larger-Catechism.pdf"

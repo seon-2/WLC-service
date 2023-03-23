@@ -1,6 +1,37 @@
 import React, { Component } from 'react';
+import eng_data from './dummy_data.json';
 
-class Section extends Component {
+class Section extends Component{
+	constructor(props) {
+		super(props);
+		this.handleClick2 = this.handleClick2.bind(this); 
+	  } 
+	 
+	handleClick2(temp){
+		if (temp == 0 && this.props.page > 1){
+			let pre = this.props.page - 1
+			this.props.changeState(pre);
+		}
+		else if(temp == 1 && this.props.page < 196){
+			let next = this.props.page + 1
+			this.props.changeState(next);
+		}
+			
+	};
+
+	rendering = () => {
+		const result = [];	
+			result.push(
+				<div className="content">
+				<p>Q.{this.props.page}</p>
+				<p>{eng_data[this.props.page].Q}</p>
+				<p>A.{this.props.page}</p>
+				<p>{eng_data[this.props.page].A}</p>					
+				</div>	
+			);
+		return result;
+	}
+	
 	render(){
 		return(
 			<section id="section">
@@ -9,12 +40,8 @@ class Section extends Component {
 						<div className="title">
 							<a href=""><span>English</span></a>
 						</div>
-						<div className="content">
-							<p>
-								{/* 영어문답 */}
-							</p>
-						</div>
-					</div>
+						{this.rendering()}
+				    </div>
 					<div className="kor">
 						<div className="title">
 							<a href=""><span>한글</span></a>
@@ -39,11 +66,11 @@ class Section extends Component {
 					</div>
 				</div>
 				<div className="pagination">
-					<a href="" className="prev">{/*이전문답이동*/}</a>
+					<a href="#" className="prev" onClick={() => this.handleClick2(0)}></a>
 					<div className="account">
-						<span className="current">{/*현재문답번호*/}current</span> / <span className="total">196</span>
+						<span className="current">{this.props.page}</span> / <span className="total">196</span>
 					</div>
-					<a href="" className="next">{/*다음문답이동*/}</a>
+					<a href="#" className="next" onClick={() => this.handleClick2(1)}></a>
 				</div>
 			</section>
 		)
