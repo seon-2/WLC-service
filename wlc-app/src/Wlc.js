@@ -5,6 +5,17 @@ import Section from './component/Section';
 import Footer from './component/Footer';
 
 class Wlc extends Component{
+	constructor(props) {
+		super(props);
+		this.state = {
+			page: 1
+		};
+	}
+	
+	changeState = (temp) => {
+		this.setState({page: temp})
+	  }
+
 	componentDidMount(){
 		this.interaction();
 	}
@@ -82,8 +93,8 @@ class Wlc extends Component{
 		return(
 			<div className="wrapper">
 				<Header></Header>
-				<Menu></Menu>
-				<Section></Section>
+				<Menu page={this.state.page} changeState={this.changeState}></Menu>
+				<Section page={this.state.page} changeState={this.changeState}></Section>
 				<Footer></Footer>
 			</div>
 		)
