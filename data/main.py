@@ -60,14 +60,13 @@ def ENG_func():
                     temp = line.split('. ')
                     temp_num = int(temp[1])
                     dic_list[temp_num] = {}
-                    # question_num = temp[0] + temp[1]
+
                     question_num = temp[0]
                     txt_list[question_num] = []
                     txt_list[question_num].append(temp[2])
                     dic_list[temp_num][question_num] = txt_list[question_num]
-                    # answer_num = "A" + temp[1]
+
                     answer_num = "A"
-                    # ref_num = "ref" + temp[1]
                     ref_num = "ref"
                     txt_list[answer_num] = []
                     txt_list[ref_num] = []
@@ -89,14 +88,20 @@ def ENG_func():
                             else:
                                 txt_list[answer_num].append(line.split(num)[0])
                                 dic_list[temp_num][answer_num] = txt_list[answer_num]
+
                                 txt_list[answer_num].append(" [" + num + "] ")
                                 dic_list[temp_num][answer_num] = txt_list[answer_num]
+
                                 line = line.split(num)[-1].lstrip()
                                 txt_list[ref_num].append(int(num))
                                 dic_list[temp_num][ref_num] = txt_list[ref_num]
+
                         if line and line_pass:
                             txt_list[answer_num].append(line)
                             dic_list[temp_num][answer_num] = txt_list[answer_num]
+                    else:
+                        txt_list[answer_num].append(line)
+                        dic_list[temp_num][answer_num] = txt_list[answer_num]
 
                 elif line_type == "Q" and line:
                     txt_list[question_num].append(line)
@@ -107,11 +112,9 @@ def ENG_func():
     for temp_num in dic_list:
         page_list[str(page_num)] = dic_list[temp_num]
 
-    # file_path = "WLC_ENG.json"
-    file_path = "WLC_test.json"
+    file_path = "WLC_ENG.json"
+    # file_path = "WLC_test.json"
     with open(file_path, 'w', encoding='utf-8') as outfile:
-        # for line in txt_list:
-        # json.dump(txt_list, outfile, indent=4, ensure_ascii=False)
         json.dump(dic_list, outfile, indent=4, ensure_ascii=False)
 
     def pdf_out_txt():
@@ -155,8 +158,8 @@ def bible_kor_func():
         json.dump(txt_list, outfile, indent=4, ensure_ascii=False)
 
 if __name__ == '__main__':
-    KOR_func()
-    # ENG_func()
+    # KOR_func()
+    ENG_func()
     # bible_kor_func()
 
 
