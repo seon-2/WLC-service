@@ -160,4 +160,3 @@ if __name__ == '__main__':
     # bible_kor_func()
 
 
-
