@@ -27,8 +27,8 @@ class Section extends Component{
 		for (let i = 0; i < result2.length; i++) {
 			result.push(
 				<div className="content" key={i}>
-				<p>[{i+1}]</p>
-				<pre>{wlc_bible_kor[i+1]}</pre>
+				<p>[{result2[i]}]</p>
+				<pre>{wlc_bible_kor[result2[i]]}</pre>
 				</div>	
 			);
 		};
