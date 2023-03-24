@@ -19,7 +19,7 @@ class Menu extends Component{
 		const result = [];
 		for (let i = value; i <= max_value; i++) {
 			result.push(
-				<li><a href="#" onClick={() => this.handleClick(i)}>{i}문</a></li>
+				<li key={i}><a href="#" onClick={() => this.handleClick(i)}>{i}문</a></li>
 			);
 			this.state.value += 1;
 		};
@@ -32,7 +32,7 @@ class Menu extends Component{
 			let max_value = value+9
 			if (value == 191){max_value = 196;}
 			result.push(
-				<li>
+				<li key={i}>
 					<a href="">{value}문~{max_value}문</a>
 					<ul>
 						{this.rendering2(value, max_value)}

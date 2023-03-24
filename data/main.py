@@ -3,19 +3,46 @@ import re
 from tika import parser
 
 def KOR_func():
+    dic_list = {}
     txt_list = {}
-    num = 0
+    answer_num = "0"
+    temp_num = "0"
     with open("WLC_KOR.txt", "r") as f:
         for line in f:
-            txt_list[num] = line
-            num += 1
+            if line != "\n":
+                if "Q." in line:
+                    line_type = "Q"
 
-    print(txt_list)
+                    temp = line.split('. ')
+                    temp_num = int(temp[1])
+                    dic_list[temp_num] = {}
+
+                    question_num = temp[0]
+                    txt_list[question_num] = []
+                    txt_list[question_num].append(temp[2])
+                    dic_list[temp_num][question_num] = txt_list[question_num]
+
+                    answer_num = "A"
+                    txt_list[answer_num] = []
+
+                elif "A." in line or line_type == "A":
+                    line_type = "A"
+                    line = line.split("A. ")[-1]
+                    txt_list[answer_num].append(line)
+                    dic_list[temp_num][answer_num] = txt_list[answer_num]
+
+                elif line_type == "Q" and line:
+                    txt_list[question_num].append(line)
+                    dic_list[temp_num][question_num] = txt_list[question_num]
+
+    page_list = {}
+    page_num = 1
+    for temp_num in dic_list:
+        page_list[str(page_num)] = dic_list[temp_num]
 
     file_path = "WLC_KOR.json"
     with open(file_path, 'w', encoding='utf-8') as outfile:
-        # for line in txt_list:
-        json.dump(txt_list, outfile, indent=4, ensure_ascii=False)
+        json.dump(dic_list, outfile, indent=4, ensure_ascii=False)
 
 def ENG_func():
     dic_list = {}
@@ -110,7 +137,27 @@ def ENG_func():
             for txt in txt_line:
                 f.write(txt)
 
+def bible_kor_func():
+    file = open('wlc_bible_kor.json')
+    jsonString = json.load(file)
+
+    txt_list = {}
+    for str in jsonString:
+        if str['번호'] in txt_list:
+            temp = '\n' + str['성경구절']
+            txt_list[str['번호']].append(temp)
+        else:
+            txt_list[str['번호']] = [str['성경구절']]
+
+    print(txt_list)
+    file_path = "test.json"
+    with open(file_path, 'w', encoding='utf-8') as outfile:
+        json.dump(txt_list, outfile, indent=4, ensure_ascii=False)
+
 if __name__ == '__main__':
-    ENG_func()
+    KOR_func()
+    # ENG_func()
+    # bible_kor_func()
+
 
 

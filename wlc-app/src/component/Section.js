@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import eng_data from './dummy_data.json';
+import eng_data from './WLC_ENG.json';
+import kor_data from './WLC_KOR.json';
+import wlc_bible_kor from './wlc_bible_kor.json';
 
 class Section extends Component{
 	constructor(props) {
@@ -19,10 +21,38 @@ class Section extends Component{
 			
 	};
 
-	rendering = () => {
+	rendering_bible_kor = () => {
+		const result = [];
+		const result2 = eng_data[this.props.page].ref
+		for (let i = 0; i < result2.length; i++) {
+			result.push(
+				<div className="content" key={i}>
+				<p>[{i+1}]</p>
+				<pre>{wlc_bible_kor[i+1]}</pre>
+				</div>	
+			);
+		};
+
+		return result;
+	}
+
+	rendering_kor = () => {
 		const result = [];	
 			result.push(
-				<div className="content">
+				<div className="content" key="kor">
+				<p>Q.{this.props.page}</p>
+				<pre>{kor_data[this.props.page].Q}</pre>
+				<p>A.{this.props.page}</p>
+				<pre>{kor_data[this.props.page].A}</pre>					
+				</div>	
+			);
+		return result;
+	}
+
+	rendering_eng = () => {
+		const result = [];	
+			result.push(
+				<div className="content" key="eng">
 				<p>Q.{this.props.page}</p>
 				<p>{eng_data[this.props.page].Q}</p>
 				<p>A.{this.props.page}</p>
@@ -40,17 +70,13 @@ class Section extends Component{
 						<div className="title">
 							<a href=""><span>English</span></a>
 						</div>
-						{this.rendering()}
+						{this.rendering_eng()}
 				    </div>
 					<div className="kor">
 						<div className="title">
 							<a href=""><span>한글</span></a>
 						</div>
-						<div className="content">
-							<p>
-								{/* 한글문답 */}
-							</p>
-						</div>
+						{this.rendering_kor()}
 					</div>
 				</div>
 				<div className="annotation_area">
@@ -60,9 +86,7 @@ class Section extends Component{
 						</p>
 					</div>
 					<div className="kor_annotation">
-						<p>
-							{/* 한글말씀 */}
-						</p>
+							{this.rendering_bible_kor()}
 					</div>
 				</div>
 				<div className="pagination">
