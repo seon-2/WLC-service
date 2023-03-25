@@ -71,9 +71,9 @@ class Section extends Component{
 			result.push(
 				<div className="content" key="eng">
 				<p>Q.{this.props.page}</p>
-				<p>{eng_data[this.props.page].Q}</p>
+				<pre>{eng_data[this.props.page].Q}</pre>
 				<p>A.{this.props.page}</p>
-				<p>{eng_data[this.props.page].A}</p>					
+				<pre>{eng_data[this.props.page].A}</pre>					
 				</div>	
 			);
 		return result;
