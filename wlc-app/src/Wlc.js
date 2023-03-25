@@ -33,6 +33,13 @@ class Wlc extends Component{
 			body.classList.toggle("fixed");
 		});
 
+		dim.addEventListener("click", function(){
+			tab.classList.remove("active");
+			menu.classList.remove("active");
+			this.classList.remove("active");
+			body.classList.remove("fixed");
+		})
+
 		let kor_btn=document.querySelector("#section .text_area .kor .title a ");
 		let eng_btn=document.querySelector("#section .text_area .eng .title a ");
 		let kor_text=document.querySelector("#section .text_area .kor");
@@ -73,6 +80,10 @@ class Wlc extends Component{
 
 				if(e.currentTarget.classList.contains("active") == true){
 					e.currentTarget.classList.remove("active");
+					tab.classList.remove("active");
+					menu.classList.remove("active");
+					dim.classList.remove("active");
+					body.classList.remove("fixed");
 				}
 				else{
 					let n=e.currentTarget.index;
