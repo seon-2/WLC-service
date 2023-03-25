@@ -51,9 +51,6 @@ def trans_func():
                     kor_line = kor_line.split("A. ")[-1]
                     numbers = re.findall(r'\d+', line)
 
-                    txt_list[answer_num].append(kor_line)
-                    dic_list[temp_num][answer_num] = txt_list[answer_num]
-
                     if numbers:
                         for num in numbers:
                             line_pass = True
@@ -63,7 +60,7 @@ def trans_func():
                                     # dic_list[temp_num][answer_num] = txt_list[answer_num]
                                     line_pass = False
                             else:
-                                txt_list[answer_num].append(" [" + num + "] ")
+                                txt_list[answer_num].append("[" + num + "]")
                                 dic_list[temp_num][answer_num] = txt_list[answer_num]
 
                                 line = line.split(num)[-1].lstrip()
@@ -76,6 +73,9 @@ def trans_func():
                     # else:
                     #     txt_list[answer_num].append(kor_line)
                     #     dic_list[temp_num][answer_num] = txt_list[answer_num]
+
+                    txt_list[answer_num].append(kor_line)
+                    dic_list[temp_num][answer_num] = txt_list[answer_num]
 
                 elif line_type == "Q" and kor_line:
                     txt_list[question_num].append(kor_line)
@@ -180,7 +180,10 @@ def ENG_func():
                                 txt_list[answer_num].append(line.split(num)[0])
                                 dic_list[temp_num][answer_num] = txt_list[answer_num]
 
-                                txt_list[answer_num].append(" [" + num + "] ")
+                                temps = ""
+                                if len(line.split(num)) > 1 and line.split(num)[1] == "\n":
+                                    temps = "\n"
+                                txt_list[answer_num].append(" [" + num + "] " + temps)
                                 dic_list[temp_num][answer_num] = txt_list[answer_num]
 
                                 line = line.split(num)[-1].lstrip()
