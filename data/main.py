@@ -290,5 +290,11 @@ if __name__ == '__main__':
     # ENG_func()
     # bible_kor_func()
     # txt_to_txt()
-    trans_func()
+    # trans_func()
+    file = open('WLC_ENG4.json')
+    jsonString = json.load(file)
 
+    txt_list = {}
+    for str in jsonString:
+        if not 'ref' in jsonString[str]:
+            print(str)
