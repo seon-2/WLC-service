@@ -5,6 +5,13 @@ import Section from './component/Section';
 import Footer from './component/Footer';
 
 class Wlc extends Component{
+	constructor(props){
+		super(props);
+		this.state={
+			engData: props.prop_value
+		}
+		//console.log(this.state.engData.Q1);
+	}
 	componentDidMount(){
 		this.interaction();
 	}
@@ -83,7 +90,7 @@ class Wlc extends Component{
 			<div className="wrapper">
 				<Header></Header>
 				<Menu></Menu>
-				<Section></Section>
+				<Section prop_value={this.state.engData}></Section>
 				<Footer></Footer>
 			</div>
 		)

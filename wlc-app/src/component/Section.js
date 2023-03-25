@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 
 class Section extends Component {
+	constructor(props){
+		super(props);
+		this.state={
+			engData: props.prop_value
+		}
+		//console.log(props.prop_value);
+	}
 	render(){
+		let engData= this.state.engData.Q1;
+		let a1= this.state.engData.A1;
+
 		return(
 			<section id="section">
 				<div className="text_area">
@@ -11,6 +21,7 @@ class Section extends Component {
 						</div>
 						<div className="content">
 							<p>
+								{engData}
 								{/* 영어문답 */}
 							</p>
 						</div>
@@ -21,6 +32,7 @@ class Section extends Component {
 						</div>
 						<div className="content">
 							<p>
+								{a1}
 								{/* 한글문답 */}
 							</p>
 						</div>
