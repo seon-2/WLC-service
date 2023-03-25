@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import eng_data from './WLC_ENG.json';
 import kor_data from './WLC_KOR.json';
 import wlc_bible_kor from './wlc_bible_kor.json';
+import wlc_bible_eng from './wlc_bible_eng.json';
 
 class Section extends Component{
 	constructor(props) {
@@ -35,6 +36,22 @@ class Section extends Component{
 
 		return result;
 	}
+
+	rendering_bible_eng = () => {
+		const result = [];
+		const result2 = eng_data[this.props.page].ref
+		for (let i = 0; i < result2.length; i++) {
+			result.push(
+				<div className="content" key={i}>
+				<p>[{result2[i]}]</p>
+				<pre>{wlc_bible_eng[result2[i]]}</pre>
+				</div>	
+			);
+		};
+
+		return result;
+	}
+
 
 	rendering_kor = () => {
 		const result = [];	
@@ -81,9 +98,7 @@ class Section extends Component{
 				</div>
 				<div className="annotation_area">
 					<div className="eng_annotation">
-						<p>
-							{/* 영어말씀 */}
-						</p>
+							{this.rendering_bible_eng()}
 					</div>
 					<div className="kor_annotation">
 							{this.rendering_bible_kor()}
