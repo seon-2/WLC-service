@@ -141,25 +141,31 @@ def ENG_func():
                 f.write(txt)
 
 def bible_kor_func():
-    file = open('wlc_bible_kor.json')
+    # file = open('wlc_bible_kor.json')
+    file = open('wlc_bible_eng.json')
     jsonString = json.load(file)
 
     txt_list = {}
     for str in jsonString:
-        if str['번호'] in txt_list:
-            temp = '\n' + str['성경구절']
-            txt_list[str['번호']].append(temp)
+        # if str['번호'] in txt_list:
+        #     temp = '\n' + str['성경구절']
+        #     txt_list[str['번호']].append(temp)
+        # else:
+        #     txt_list[str['번호']] = [str['성경구절']]
+        if str['각주'] in txt_list:
+            temp = '\n' + str['KJV']
+            txt_list[str['각주']].append(temp)
         else:
-            txt_list[str['번호']] = [str['성경구절']]
+            txt_list[str['각주']] = [str['KJV']]
 
     print(txt_list)
-    file_path = "test.json"
+    file_path = "test2.json"
     with open(file_path, 'w', encoding='utf-8') as outfile:
         json.dump(txt_list, outfile, indent=4, ensure_ascii=False)
 
 if __name__ == '__main__':
-    # KOR_func()
-    ENG_func()
-    # bible_kor_func()
+    KOR_func()
+    # ENG_func()
+    bible_kor_func()
 
 
