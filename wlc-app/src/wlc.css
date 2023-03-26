@@ -579,6 +579,14 @@ pre {
 	height: 35px;
 	background: url(../public/assets/images/church_logo.png) no-repeat center center;
 }
+#footer .copyright {
+	width: 50%;
+}
+#footer .copyright p {
+	color: #fff;
+	font-size: 10px;
+	word-break: keep-all;
+}
 #footer .link a {
 	font-size: 1.875em;
 	color: #fff;
@@ -598,16 +606,33 @@ pre {
 		height: 23px;
 		background: url(../public/assets/images/mobile_church_logo.png) no-repeat center center;
 	}
-
+	#footer .copyright p {
+		zoom: 0.8;
+	}
+	#footer .link a:first-child,
+	#footer .link a:nth-child(2) {
+		margin-right: 15px;
+	}
 }
 @media only screen and (max-width: 500px) {
 	#footer {
 		padding: 0 25px;
 		font-size: 0.75em;
 	}
+	#footer .copyright p {
+		zoom: 0.6;
+	}
+	#footer .link a:first-child,
+	#footer .link a:nth-child(2) {
+		margin-right: 10px;
+	}
 }
 @media only screen and (max-width: 400px) {
 	#footer {
 		font-size: 0.625em;
+	}
+	#footer .link a:first-child,
+	#footer .link a:nth-child(2) {
+		margin-right: 7px;
 	}
 }
